@@ -30,6 +30,12 @@
 .pub/
 /build/
 
+# Android
+google-services.json
+
+# Agora
+lib/configs/
+
 # Web related
 lib/generated_plugin_registrant.dart
 
