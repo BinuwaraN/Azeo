@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "13950313233",
+    "firebase_url": "https://azeo-app.firebaseio.com",
+    "project_id": "azeo-app",
+    "storage_bucket": "azeo-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13950313233:android:f8ac806aeeddd2f0f762b0",
+        "android_client_info": {
+          "package_name": "dev.binuwaran.azeo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "13950313233-0n3nh20j3g91e25er48r5h8jk5tvjsu5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.binuwaran.azeo",
+            "certificate_hash": "eb9733e49f0e2dcc088142751332c0bde8e9759d"
+          }
+        },
+        {
+          "client_id": "13950313233-o6oujlvdgad78euuq1lih6u0kei80tps.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-Ct7WqYh2BF4DCmEI1_3sOmSyHy8I6f8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "13950313233-o6oujlvdgad78euuq1lih6u0kei80tps.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
