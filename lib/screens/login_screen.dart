@@ -53,38 +53,50 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       isLoginPressed = true;
     });
-
-    _authMethods.signIn().then((FirebaseUser user) {
-      if (user != null) {
-        print('Performing Login');
-        authenticateUser(user);
-      } else {
-        print('There was an error');
-      }
-    });
+    FirebaseUser user = await _authMethods.signIn();
+    if (user != null) {
+      print('Performing Login');
+      authenticateUser(user);
+    } else {
+      print('There was an error');
+    }
   }
 
-  void authenticateUser(FirebaseUser user) {
-    _authMethods.authenticateUser(user).then((isNewUser) {
+  void authenticateUser(FirebaseUser user) async {
+    bool isNewUser = await _authMethods.authenticateUser(user);
+
+    if (isNewUser) {
+      // _authMethods.addDataToDb(user).then((value) async {
+      //   await Navigator.pushAndRemoveUntil(context,
+      //       MaterialPageRoute(builder: (context) {
+      //     return HomeScreen();
+      //   }), (Route<dynamic> route) => false);
+
+      //   setState(() {
+      //     isLoginPressed = false;
+      //   });
+      // });
+
+      await _authMethods.addDataToDb(user);
+
+      await Navigator.pushAndRemoveUntil(context,
+          MaterialPageRoute(builder: (context) {
+        return HomeScreen();
+      }), (Route<dynamic> route) => false);
+
       setState(() {
         isLoginPressed = false;
       });
+    } else {
+      await Navigator.pushAndRemoveUntil(context,
+          MaterialPageRoute(builder: (context) {
+        return HomeScreen();
+      }), (Route<dynamic> route) => false);
 
-      if (isNewUser) {
-        _authMethods.addDataToDb(user).then((value) {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) {
-            return HomeScreen();
-          }));
-        });
-      } else {
-        print('Going to the Home Screen');
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) {
-          return HomeScreen();
-        }));
-      }
-    });
+      setState(() {
+        isLoginPressed = false;
+      });
+    }
   }
 
   Widget _signInButton() {
