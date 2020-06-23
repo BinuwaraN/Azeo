@@ -1,6 +1,5 @@
 import 'package:azeo/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import 'login_screen.dart';
 
@@ -23,7 +22,7 @@ class WelcomeScreen extends StatelessWidget {
               style: Theme.of(context).textTheme.headline1,
             ),
             SizedBox(height: size.height * 0.05),
-            SvgPicture.asset(
+            Image.asset(
               "assets/svg/chat.svg",
               height: size.height * 0.45,
             ),

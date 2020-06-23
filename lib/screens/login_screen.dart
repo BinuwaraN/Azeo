@@ -2,7 +2,6 @@ import 'package:azeo/screens/home_screen.dart';
 import 'package:azeo/services/auth_methods.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -35,8 +34,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: Theme.of(context).textTheme.headline1,
                     ),
                     SizedBox(height: size.height * 0.03),
-                    SvgPicture.asset(
-                      "assets/svg/login.svg",
+                    Image.asset(
+                      'assets/images/login.png',
                       height: size.height * 0.35,
                     ),
                     SizedBox(height: size.height * 0.03),
@@ -66,17 +65,6 @@ class _LoginScreenState extends State<LoginScreen> {
     bool isNewUser = await _authMethods.authenticateUser(user);
 
     if (isNewUser) {
-      // _authMethods.addDataToDb(user).then((value) async {
-      //   await Navigator.pushAndRemoveUntil(context,
-      //       MaterialPageRoute(builder: (context) {
-      //     return HomeScreen();
-      //   }), (Route<dynamic> route) => false);
-
-      //   setState(() {
-      //     isLoginPressed = false;
-      //   });
-      // });
-
       await _authMethods.addDataToDb(user);
 
       await Navigator.pushAndRemoveUntil(context,
