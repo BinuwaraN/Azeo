@@ -23,7 +23,7 @@ class WelcomeScreen extends StatelessWidget {
             ),
             SizedBox(height: size.height * 0.05),
             Image.asset(
-              "assets/svg/chat.svg",
+              "assets/images/chat.png",
               height: size.height * 0.45,
             ),
             SizedBox(height: size.height * 0.05),
