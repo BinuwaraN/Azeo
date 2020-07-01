@@ -9,7 +9,7 @@
  Azeo is a open source messaging app built with Dart on top of Google's Flutter Framework
 </h4>
 <p align="center">
-    <a href="https://github.com/BinuwaraN/Azeo">View Demo</a>
+    <!-- <a href="https://github.com/BinuwaraN/Azeo">View Demo</a> -->
     ·
     <a href="https://github.com/BinuwaraN/Azeo/issues">Report Bug</a>
     ·
@@ -32,14 +32,13 @@
 |  UI  | Logic | Feature |
 | ------ | ------ | ------|
 | ✔ | ✔ | Google sign in
-|  |  | Friend Request
+|  | ✔ | Friend Request
 |  | ✔ | User status
 |  |  | Profile Setup
-|  |  | Video & audio chat
+|  | ✔ | Video & audio chat
 |  |  | Gruop chat
 |  |  | Handle offline/online connectivity
 |  | ✔ | Dark & Light Mode
-|  |  | Forget Password
 ### and many more......
 
 <!-- ## Screenshots -->
@@ -96,7 +95,7 @@ $ flutter run
 
 - 🔃 Create a new pull request using <a href="https://github.com/BinuwaraN/Azeo/compare/" target="_blank">`https://github.com/BinuwaraN/Azeo/compare/`</a>.
 
-## Contributors
+<!-- ## Contributors -->
 
 ## Authors
 
