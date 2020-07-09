@@ -32,7 +32,7 @@
 |  UI  | Logic | Feature |
 | ------ | ------ | ------|
 | ✔ | ✔ | Google sign in
-|  | ✔ | Friend Request
+| ✔ | ✔ | Friend Request
 |  | ✔ | User status
 |  |  | Profile Setup
 |  | ✔ | Video & audio chat

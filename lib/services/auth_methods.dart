@@ -41,23 +41,24 @@ class AuthMethods {
   }
 
   Future<FirebaseUser> signIn() async {
-    try {
-      GoogleSignInAccount _signInAccount = await _googleSignIn.signIn();
+    GoogleSignInAccount _signInAccount = await _googleSignIn.signIn();
+
+    FirebaseUser firebaseUser;
+
     GoogleSignInAuthentication _signInAuthentication =
         await _signInAccount.authentication;
-
     final AuthCredential credential = GoogleAuthProvider.getCredential(
         accessToken: _signInAuthentication.accessToken,
         idToken: _signInAuthentication.idToken);
 
-    AuthResult result = await _auth.signInWithCredential(credential);
-    FirebaseUser user = result.user;
-    return user;
+    try {
+      AuthResult result = await _auth.signInWithCredential(credential);
+      firebaseUser = result.user;
     } catch (e) {
-      print("Auth methods error");
       print(e);
-      return null;
     }
+
+    return firebaseUser;
   }
 
   Future<bool> authenticateUser(FirebaseUser user) async {
@@ -74,8 +75,6 @@ class AuthMethods {
 
   Future<void> addDataToDb(FirebaseUser currentUser) async {
     String username = Utils.getUsername(currentUser.email);
-
-    
 
     User user = User(
         uid: currentUser.uid,

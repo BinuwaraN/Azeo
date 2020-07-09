@@ -21,9 +21,14 @@ dependencies:
   cupertino_icons: ^0.1.3
   
   # State Management tools
-  provider: ^4.1.3
+  provider: ^4.3.0
 
+  # Animation
+  flare_flutter: ^2.0.5
+
+  # Other 
   flutter_launcher_icons: ^0.7.5
+  shimmer: ^1.1.1
 
 dev_dependencies:
   flutter_test:
@@ -43,3 +48,4 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/animations/

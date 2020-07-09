@@ -54,7 +54,6 @@ class _LoginScreenState extends State<LoginScreen> {
     });
     FirebaseUser user = await _authMethods.signIn();
     if (user != null) {
-      print('Performing Login');
       authenticateUser(user);
     } else {
       print('There was an error');
