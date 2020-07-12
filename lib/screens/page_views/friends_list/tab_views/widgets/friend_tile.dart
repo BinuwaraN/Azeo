@@ -1,15 +1,18 @@
 import 'package:azeo/models/friend.dart';
 import 'package:azeo/models/user.dart';
-import 'package:azeo/screens/pageviews/friends_list/widgets/shimmer_pending_view.dart';
+import 'package:azeo/providers/theme_provider.dart';
 import 'package:azeo/services/auth_methods.dart';
 import 'package:azeo/services/friend_methods.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class FriendPendingView extends StatelessWidget {
+import '../../widgets/shimmer_pending_view.dart';
+
+class FriendTile extends StatelessWidget {
   final Friend friend;
   final User currentUser;
 
-  const FriendPendingView({this.friend, this.currentUser});
+  const FriendTile({this.friend, this.currentUser});
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +23,14 @@ class FriendPendingView extends StatelessWidget {
         future: _authMethods.getUserDetailsById(friend.uid),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return FriendPendingTile(
+            return TileView(
               user: snapshot.data,
               cancel: () =>
                   _friendMethods.removeFriend(currentUser.uid, friend.uid),
               accept: () =>
                   _friendMethods.acceptFriend(currentUser.uid, friend.uid),
               isSender: friend.isSender,
+              isAccepted: friend.isAccepted,
             );
           }
 
@@ -35,18 +39,20 @@ class FriendPendingView extends StatelessWidget {
   }
 }
 
-class FriendPendingTile extends StatelessWidget {
+class TileView extends StatelessWidget {
   final User user;
   final Function cancel;
   final Function accept;
   final bool isSender;
+  final bool isAccepted;
 
-  const FriendPendingTile({this.user, this.cancel, this.accept, this.isSender});
+  const TileView(
+      {this.user, this.cancel, this.accept, this.isSender, this.isAccepted});
 
   @override
   Widget build(BuildContext context) {
-    var brightness = MediaQuery.of(context).platformBrightness;
-    bool darkModeOn = brightness == Brightness.dark ? true : false;
+    bool darkModeOn =
+        Provider.of<ThemeProvider>(context, listen: false).isDarkMode;
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 12.0),
@@ -79,7 +85,7 @@ class FriendPendingTile extends StatelessWidget {
                     ),
                   ),
                 ),
-                isSender
+                isSender || isAccepted
                     ? SizedBox.shrink()
                     : IconButton(
                         icon: Icon(Icons.check), onPressed: () => accept()),

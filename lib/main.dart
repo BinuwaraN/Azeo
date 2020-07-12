@@ -24,36 +24,37 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider<ThemeProvider>(
-          create: (_) => ThemeProvider(AppTheme.lightTheme),
-        ),
+            create: (context) => ThemeProvider()),
       ],
-      child: MaterialAppWithTheme(),
+      child: MyHome(),
     );
   }
 }
 
-class MaterialAppWithTheme extends StatelessWidget {
+class MyHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthMethods _authMethods = AuthMethods();
-    final theme = Provider.of<ThemeProvider>(context);
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Azeo',
-      theme: theme.getTheme(),
-      darkTheme: AppTheme.darkTheme,
-      initialRoute: "/",
-      home: FutureBuilder(
-        future: _authMethods.getCurrentUser(),
-        builder: (context, AsyncSnapshot<FirebaseUser> snapshot) {
-          if (snapshot.hasData) {
-            return HomeScreen();
-          } else {
-            return WelcomeScreen();
-          }
-        },
-      ),
-    );
+    return Consumer(builder: (context, ThemeProvider theme, child) {
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Azeo',
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: theme.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+        initialRoute: "/",
+        home: FutureBuilder(
+          future: _authMethods.getCurrentUser(),
+          builder: (context, AsyncSnapshot<FirebaseUser> snapshot) {
+            if (snapshot.hasData) {
+              return HomeScreen();
+            } else {
+              return WelcomeScreen();
+            }
+          },
+        ),
+      );
+    });
   }
 }

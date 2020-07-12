@@ -1,8 +1,8 @@
-import 'package:azeo/screens/pageviews/chat_list/widgets/chat_list_search.dart';
-import 'package:azeo/screens/pageviews/chat_list/widgets/contact_view.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/chat_list_app_bar.dart';
+import 'widgets/chat_list_search.dart';
+import 'widgets/contact_view.dart';
 
 class ChatListScreen extends StatefulWidget {
   @override
@@ -42,9 +42,6 @@ class ChatListContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        ContactView(),
-        ContactView(),
-        ContactView(),
         ContactView(),
       ],
     );

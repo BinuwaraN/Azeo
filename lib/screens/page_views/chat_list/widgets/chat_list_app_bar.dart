@@ -1,14 +1,16 @@
+import 'package:azeo/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class FriendListAppBar extends StatelessWidget implements PreferredSizeWidget {
+class ChatListAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Function onTap;
 
-  const FriendListAppBar({this.onTap});
+  const ChatListAppBar({this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    var brightness = MediaQuery.of(context).platformBrightness;
-    bool darkModeOn = brightness == Brightness.dark;
+    bool darkModeOn =
+        Provider.of<ThemeProvider>(context, listen: false).isDarkMode;
 
     Widget appBarButton() {
       return FlatButton(
@@ -18,17 +20,20 @@ class FriendListAppBar extends StatelessWidget implements PreferredSizeWidget {
             borderRadius: new BorderRadius.circular(30.0)),
         child: Row(
           children: <Widget>[
-            Icon(Icons.add,
-                size: 20, color: darkModeOn ? Colors.white : Colors.black),
+            Icon(
+              Icons.add,
+              color: darkModeOn ? Colors.white : Colors.black,
+              size: 20,
+            ),
             SizedBox(
               width: 2,
             ),
             Text(
-              "Add",
+              "New",
               style: TextStyle(
+                color: darkModeOn ? Colors.white : Colors.black,
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
-                color: darkModeOn ? Colors.white : Colors.black,
               ),
             ),
           ],
@@ -37,6 +42,7 @@ class FriendListAppBar extends StatelessWidget implements PreferredSizeWidget {
     }
 
     return Container(
+      // color: Theme.of(context).primaryColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -47,7 +53,7 @@ class FriendListAppBar extends StatelessWidget implements PreferredSizeWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    "Friends",
+                    "Chats",
                     style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,

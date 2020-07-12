@@ -1,38 +1,36 @@
+import 'package:azeo/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class ChatListAppBar extends StatelessWidget implements PreferredSizeWidget {
+class FriendListAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Function onTap;
 
-  const ChatListAppBar({this.onTap});
+  const FriendListAppBar({this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    var brightness = MediaQuery.of(context).platformBrightness;
-    bool darkModeOn = brightness == Brightness.dark;
+    bool darkModeOn =
+        Provider.of<ThemeProvider>(context, listen: false).isDarkMode;
 
     Widget appBarButton() {
       return FlatButton(
         onPressed: () => onTap(),
-        // padding: EdgeInsets.symmetric(horizontal: 2.0, vertical: 2.0),
         color: Theme.of(context).accentColor,
         shape: new RoundedRectangleBorder(
             borderRadius: new BorderRadius.circular(30.0)),
         child: Row(
           children: <Widget>[
-            Icon(
-              Icons.add,
-              color: Colors.black,
-              size: 20,
-            ),
+            Icon(Icons.add,
+                size: 20, color: darkModeOn ? Colors.white : Colors.black),
             SizedBox(
               width: 2,
             ),
             Text(
-              "New",
+              "Add",
               style: TextStyle(
-                color: Colors.black,
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
+                color: darkModeOn ? Colors.white : Colors.black,
               ),
             ),
           ],
@@ -41,7 +39,6 @@ class ChatListAppBar extends StatelessWidget implements PreferredSizeWidget {
     }
 
     return Container(
-      // color: Theme.of(context).primaryColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -52,7 +49,7 @@ class ChatListAppBar extends StatelessWidget implements PreferredSizeWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    "Chats",
+                    "Friends",
                     style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,

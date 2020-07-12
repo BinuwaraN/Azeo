@@ -1,10 +1,12 @@
+import 'package:azeo/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ContactView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var brightness = MediaQuery.of(context).platformBrightness;
-    bool darkModeOn = brightness == Brightness.dark ? true : false;
+    bool darkModeOn =
+        Provider.of<ThemeProvider>(context, listen: false).isDarkMode;
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
@@ -15,7 +17,7 @@ class ContactView extends StatelessWidget {
               children: <Widget>[
                 CircleAvatar(
                   backgroundImage: NetworkImage(
-                      'https://i2.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png'),
+                      'https://miro.medium.com/max/1000/0*kBHpKva09AsGj7RQ'),
                   maxRadius: 30,
                 ),
                 SizedBox(
@@ -28,7 +30,7 @@ class ContactView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          'widget.text',
+                          'HackerMan',
                           style: TextStyle(
                               color: darkModeOn ? Colors.white : Colors.black,
                               fontSize: 18.0,
@@ -38,7 +40,7 @@ class ContactView extends StatelessWidget {
                           height: 6,
                         ),
                         Text(
-                          'widget.secondaryText',
+                          'Test 213124',
                           style: TextStyle(
                               color: darkModeOn ? Colors.white : Colors.black),
                         ),

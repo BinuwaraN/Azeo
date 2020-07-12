@@ -1,4 +1,6 @@
+import 'package:azeo/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AddFriendDialog extends StatelessWidget {
   final Function onTap;
@@ -7,6 +9,9 @@ class AddFriendDialog extends StatelessWidget {
   const AddFriendDialog({this.onTap, this.controller});
   @override
   Widget build(context) {
+    bool darkModeOn =
+        Provider.of<ThemeProvider>(context, listen: false).isDarkMode;
+
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       child: Container(
@@ -63,7 +68,8 @@ class AddFriendDialog extends StatelessWidget {
                   color: Theme.of(context).accentColor,
                   child: Text(
                     "Add",
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(
+                        color: darkModeOn ? Colors.white : Colors.black),
                   ),
                 ),
               )

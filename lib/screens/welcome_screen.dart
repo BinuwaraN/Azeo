@@ -1,4 +1,3 @@
-import 'package:azeo/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 
 import 'login_screen.dart';
@@ -27,24 +26,35 @@ class WelcomeScreen extends StatelessWidget {
               height: size.height * 0.45,
             ),
             SizedBox(height: size.height * 0.05),
-            RoundedButton(
-              text: "START",
-              textColor: Colors.black,
-              color: Theme.of(context).primaryColor,
-              press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return LoginScreen();
-                    },
-                  ),
-                );
-              },
-            ),
+            _welcomeButton(size, context),
           ],
         ),
       ),
     ));
+  }
+
+  Widget _welcomeButton(Size size, BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      width: size.width * 0.8,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(29),
+        child: FlatButton(
+          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+          color: Theme.of(context).primaryColor,
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return LoginScreen();
+              },
+            ),
+          ),
+          child: Text(
+            'START',
+          ),
+        ),
+      ),
+    );
   }
 }
