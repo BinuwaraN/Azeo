@@ -3,10 +3,9 @@ import 'package:azeo/models/user.dart';
 import 'package:azeo/providers/theme_provider.dart';
 import 'package:azeo/services/auth_methods.dart';
 import 'package:azeo/services/friend_methods.dart';
+import 'package:azeo/widgets/shimmer_tile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../widgets/shimmer_pending_view.dart';
 
 class FriendTile extends StatelessWidget {
   final Friend friend;
@@ -34,7 +33,7 @@ class FriendTile extends StatelessWidget {
             );
           }
 
-          return ShimmerPendingFriend();
+          return ShimmerTile();
         });
   }
 }

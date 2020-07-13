@@ -42,7 +42,6 @@ class ChatListAppBar extends StatelessWidget implements PreferredSizeWidget {
     }
 
     return Container(
-      // color: Theme.of(context).primaryColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[

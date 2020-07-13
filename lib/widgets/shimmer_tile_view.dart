@@ -1,11 +1,13 @@
+import 'package:azeo/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
-class ShimmerPendingFriend extends StatelessWidget {
+class ShimmerTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var brightness = MediaQuery.of(context).platformBrightness;
-    bool darkModeOn = brightness == Brightness.dark ? true : false;
+    bool darkModeOn =
+        Provider.of<ThemeProvider>(context, listen: false).isDarkMode;
 
     return Shimmer.fromColors(
       baseColor: darkModeOn ? Colors.grey[900] : Colors.grey[800],

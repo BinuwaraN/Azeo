@@ -1,8 +1,10 @@
 import 'package:azeo/constants/strings.dart';
+import 'package:azeo/enum/user_state.dart';
 import 'package:azeo/models/user.dart';
 import 'package:azeo/utilities/utilities.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthMethods {
@@ -26,6 +28,7 @@ class AuthMethods {
 
     DocumentSnapshot documentSnapshot =
         await _userCollection.document(currentUser.uid).get();
+
     return User.fromMap(documentSnapshot.data);
   }
 
@@ -112,4 +115,15 @@ class AuthMethods {
       return false;
     }
   }
+
+  void setUserState({@required String userId, @required UserState userState}) {
+    int stateNum = Utils.stateToNum(userState);
+
+    _userCollection.document(userId).updateData({
+      "state": stateNum,
+    });
+  }
+
+  Stream<DocumentSnapshot> getUserStream({@required String uid}) =>
+      _userCollection.document(uid).snapshots();
 }

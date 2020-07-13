@@ -1,6 +1,9 @@
+import 'package:azeo/enum/user_state.dart';
 import 'package:azeo/providers/user_provider.dart';
 import 'package:azeo/screens/page_views/gruop_list/gruop_screen.dart';
+import 'package:azeo/services/auth_methods.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import 'page_views/chat_list/chat_list_screen.dart';
@@ -16,15 +19,27 @@ class _HomeScreenState extends State<HomeScreen> {
   PageController pageController;
   int _page = 0;
 
+  final AuthMethods _authMethods = AuthMethods();
+
   UserProvider userProvider;
 
   @override
   void initState() {
-    super.initState();
-    userProvider = Provider.of<UserProvider>(context, listen: false);
-    userProvider.refreshUser();
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      userProvider = Provider.of<UserProvider>(context, listen: false);
+      userProvider.refreshUser();
+
+      if (userProvider.getUser != null && userProvider != null) {
+        _authMethods.setUserState(
+          userId: userProvider.getUser.uid,
+          userState: UserState.Online,
+        );
+      }
+    });
 
     pageController = PageController();
+
+    super.initState();
   }
 
   void onPageChanged(int page) {
@@ -42,10 +57,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
         body: PageView(
           children: <Widget>[
-            Container(child: ChatListScreen()),
-            Container(child: GruopScreen()),
-            Container(child: FriendsListScreen()),
-            Container(child: ProfileScreen()),
+            ChatListScreen(),
+            GruopScreen(),
+            FriendsListScreen(),
+            ProfileScreen(),
           ],
           controller: pageController,
           onPageChanged: onPageChanged,

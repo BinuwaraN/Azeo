@@ -22,9 +22,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
         ChangeNotifierProvider<ThemeProvider>(
-            create: (context) => ThemeProvider()),
+            create: (context) => ThemeProvider())
       ],
       child: MyHome(),
     );

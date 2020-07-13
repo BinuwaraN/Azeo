@@ -123,19 +123,15 @@ class FriendMethods {
     }
   }
 
-  Stream<QuerySnapshot> fetchFriends(
-      String currentUserId, bool isAccepted) {
-    Stream<QuerySnapshot> _friends = _userCollection
-        .document(currentUserId)
-        .collection(FRIENDS_COLLECTION)
-        .where(
-          'isAccepted',
-          isEqualTo: isAccepted,
-        )
-        .snapshots();
-
-    return _friends;
-  }
+  Stream<QuerySnapshot> fetchFriends({String currentUserId, bool isAccepted}) =>
+      _userCollection
+          .document(currentUserId)
+          .collection(FRIENDS_COLLECTION)
+          .where(
+            'isAccepted',
+            isEqualTo: isAccepted,
+          )
+          .snapshots();
 
   getFriendFromUserDb(String currentUserId, String friendId) => _userCollection
       .document(currentUserId)

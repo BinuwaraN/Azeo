@@ -20,17 +20,14 @@ class AllTabView extends StatelessWidget {
 
     return Container(
       child: StreamBuilder(
-        stream: _friendMethods.fetchFriends(currentUser.uid, true),
+        stream: _friendMethods.fetchFriends(
+            currentUserId: currentUser.uid, isAccepted: true),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             var docList = snapshot.data.documents;
 
             if (docList.isEmpty) {
-              return QuietBox(
-                imagePath:
-                    'https://pics.me.me/making-friends-in-real-life-making-friends-online-how-old-41516462.png',
-                text: 'You don\'t have any friends. You don\'t have to though!',
-              );
+              return Center(child: Text('Empty'));
             }
 
             return ListView.builder(
